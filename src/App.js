@@ -5,16 +5,16 @@ import SignUpPage from "./components/Pages/SignUpPage";
 import TodayPage from "./components/Pages/TodayPage";
 import HistoricPage from "./components/Pages/HistoricPage";
 import styled from "styled-components"; 
+import { useState } from "react";
 
 export default function App() {
+  const [user, setUser] = useState({email: "", password: "", name: "", image: "", token: "", id: ""});
+
   return (
     <TrackIt>
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={
-      <LoginPage
-      
-      />}/>
+      <Route path="/" element={<LoginPage/>}/>
       <Route path="/habitos" element={<HabitsPage/>}/>
       <Route path="/cadastro" element={<SignUpPage/>}/>
       <Route path="/hoje" element={<TodayPage/>}/>
