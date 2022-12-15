@@ -6,11 +6,14 @@ import TodayPage from "./components/Pages/TodayPage";
 import HistoricPage from "./components/Pages/HistoricPage";
 import styled from "styled-components"; 
 import { useState } from "react";
+import { UserContext } from "./contexts/UserContext";
 
 export default function App() {
   const [user, setUser] = useState({email: "", password: "", name: "", image: "", token: "", id: ""});
+  const [page, setPage] = useState("login");
 
   return (
+    <UserContext.Provider value={{user, setUser, page, setPage}}>
     <TrackIt>
     <BrowserRouter>
     <Routes>
@@ -19,16 +22,17 @@ export default function App() {
       <Route path="/cadastro" element={<SignUpPage/>}/>
       <Route path="/hoje" element={<TodayPage/>}/>
       <Route path="/historico" element={<HistoricPage/>}/>
-
     </Routes>
   </BrowserRouter>
   </TrackIt>
+  </UserContext.Provider>
   );
 }
 
 const TrackIt = styled.div`
 display: flex;
 justify-content: center;
-margin-top: 20px;
+width: 375px;
+margin: auto;
 `
 

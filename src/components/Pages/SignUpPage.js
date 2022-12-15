@@ -28,19 +28,18 @@ export default function SignUpPage() {
                 alert(err.response.data.message)
             })
             ;
-
     }
 
     function loadingSignUp(loading) {
         return (
             loading ?
-            <ThreeDots
-                height="80"
-                width="80"
-                radius="9"
-                color="white"
-                loading={loading}
-            /> : "Cadastrar"
+                <ThreeDots
+                    height="80"
+                    width="80"
+                    radius="9"
+                    color="white"
+                    loading={loading}
+                /> : "Cadastrar"
         )
     }
 
@@ -58,7 +57,7 @@ export default function SignUpPage() {
                     <p>Já tem uma conta? Faça login!</p>
                 </Link>
             </form>
-          
+
         </SignPage>
     )
 }
@@ -69,6 +68,7 @@ const SignPage = styled.div`
     align-items: center;
     img {
         width: 180px;
+        margin-top: 70px;
     }
     form {
         display: flex;

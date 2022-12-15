@@ -4,11 +4,15 @@ import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
-import { ThreeDots } from 'react-loader-spinner'
+import { ThreeDots } from 'react-loader-spinner';
+import {UserContext} from "../../contexts/UserContext";
+import { useContext } from "react";
 
 export default function SignInPage() {
     const [form, setForm] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
+
+    const {setUser, setPage} = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -23,7 +27,8 @@ export default function SignInPage() {
         setLoading(true);
         axios.post(`${BASE_URL}login`, form)
             .then(res => {
-                localStorage.setItem("token", res.data.token);
+                setPage("habits")
+                setUser(res.data);
                 navigate("/habitos");
                 console.log(res)})
             .catch(err => {
@@ -46,12 +51,12 @@ export default function SignInPage() {
     }
 
     return (
-        <SignPage>
+        <SignPage loading={loading}>
             <img src={logo} alt="logo" />
             <form onSubmit={signIn}>
-                <input name="email" type="email" placeholder="email" onChange={e => handleForm(e)} />
-                <input name="password" type="password" placeholder="senha" onChange={e => handleForm(e)} />
-                <button type="submit">{loadingSignIn(loading)}</button>
+                <input disabled={loading} name="email" type="email" placeholder="email" onChange={e => handleForm(e)} />
+                <input disabled={loading} name="password" type="password" placeholder="senha" onChange={e => handleForm(e)} />
+                <button disabled={loading} type="submit">{loadingSignIn(loading)}</button>
                 <Link to="/cadastro">
                     <p>Não tem uma conta? Cadastre-se!</p>
                 </Link>
@@ -67,6 +72,7 @@ const SignPage = styled.div`
     align-items: center;
     img {
         width: 180px;
+        margin-top: 70px;
     }
     form {
         display: flex;
@@ -81,6 +87,8 @@ const SignPage = styled.div`
         border-radius: 5px;
         font-size: 20px;
         padding-left: 10px;
+        color: ${props => props.loading ? "#D4D4D4" : "#000"};
+        background-color: ${props => props.loading ? "#F2F2F2" : "#fff"}};
         
     }
     form button {
@@ -95,6 +103,7 @@ const SignPage = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        opacity: ${props => props.loading ? 0.7 : 1};
     }
     form a {
         font-size: 14px;
