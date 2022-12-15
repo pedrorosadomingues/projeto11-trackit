@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import styled from "styled-components";
 
-export default function HabitSubtitle() {
+export default function Subtitle() {
     const { page } = useContext(UserContext);
     return (
-        <Subtitle>
+        <Subtitlestyle>
             {page === "habits" && <>
                 <h1>Meus hábitos</h1>
                 <button>+</button>
@@ -14,11 +14,11 @@ export default function HabitSubtitle() {
                 <h1>Hoje</h1>
                 <h2>0% habitos concluidos</h2>
             </>}
-        </Subtitle>
+        </Subtitlestyle>
     )
 }
 
-const Subtitle = styled.div`
+const Subtitlestyle = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,5 +43,7 @@ const Subtitle = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        :hover {
+            cursor: pointer;
     }
-`
+}`

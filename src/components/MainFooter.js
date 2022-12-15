@@ -24,6 +24,15 @@ const Footer = styled.footer`
     background: #FFFFFF;
     box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.15);
 
+    a{
+        text-decoration: none;
+        color: #52B6FF;
+        font-size: 18px;
+        font-family: 'Lexend Deca', sans-serif;
+        font-weight: 400;
+        line-height: 22px;
+    }
+
     .CircularProgressbar {
         background: #52B6FF;
         border-radius: 50%;

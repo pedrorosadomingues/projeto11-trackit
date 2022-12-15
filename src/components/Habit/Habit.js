@@ -1,4 +1,4 @@
-import HabitSubtitle from "./HabitSubtitle";
+import HabitSubtitle from "../Subtitle";
 import styled from "styled-components";
 
 export default function Habit() {

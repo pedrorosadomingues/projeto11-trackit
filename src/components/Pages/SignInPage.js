@@ -96,6 +96,7 @@ const SignPage = styled.div`
         height: 45px;
         border: none;
         border-radius: 5px;
+        margin: 10px auto 5px auto;
         background-color: #52B6FF;
         color: #fff;
         font-size: 20px;
@@ -104,6 +105,9 @@ const SignPage = styled.div`
         justify-content: center;
         align-items: center;
         opacity: ${props => props.loading ? 0.7 : 1};
+        :hover {
+            cursor: pointer;
+        }
     }
     form a {
         font-size: 14px;
