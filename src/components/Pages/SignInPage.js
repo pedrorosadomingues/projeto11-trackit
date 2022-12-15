@@ -52,7 +52,7 @@ export default function SignInPage() {
     }
 
     return (
-        <SignPage loading={loading}>
+        <SignPage loadingAnimation={loading}>
             <img src={logo} alt="logo" />
             <form onSubmit={signIn}>
                 <input disabled={loading} name="email" type="email" placeholder="email" onChange={e => handleForm(e)} />
@@ -62,7 +62,6 @@ export default function SignInPage() {
                     <p>Não tem uma conta? Cadastre-se!</p>
                 </Link>
             </form>
-
         </SignPage>
     )
 }
@@ -91,7 +90,7 @@ const SignPage = styled.div`
         color: ${props => props.loading ? "#D4D4D4" : "#000"};
         background-color: ${props => props.loading ? "#F2F2F2" : "#fff"}};
         
-    }
+    
     form button {
         width: 303px;
         height: 45px;
@@ -116,4 +115,5 @@ const SignPage = styled.div`
         text-align: center;
         font-family: 'Lexend Deca', sans-serif;
     }
+
 `

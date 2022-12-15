@@ -9,7 +9,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 
 export default function HabitsPage() {
-    const { habits, setHabits, user } = useContext(UserContext); 
+    const { habits, setHabits, user, setPage } = useContext(UserContext); 
 
     const config = {
         headers: {
@@ -17,8 +17,9 @@ export default function HabitsPage() {
         }
     }
     useEffect(() => {
+        setPage("habits");
         axios.get(`${BASE_URL}habits`, config)
-            .then((res) => {
+            .then((res) => {          
                 setHabits(res.data)
                 console.log(habits)
             })
