@@ -21,7 +21,7 @@ export default function SignUpPage() {
     function signUp(e) {
         e.preventDefault();
         setLoading(true);
-        axios.post(`${BASE_URL}sign-up`, form)
+        axios.post(`${BASE_URL}auth/sign-up`, form)
             .then(res => navigate("/"))
             .catch(err => {
                 setLoading(false);
@@ -90,6 +90,7 @@ const SignPage = styled.div`
         height: 45px;
         border: none;
         border-radius: 5px;
+        margin: 10px auto 5px auto;
         background-color: #52B6FF;
         color: #fff;
         font-size: 20px;
@@ -97,10 +98,14 @@ const SignPage = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        :hover {
+            cursor: pointer;
+        }
     }
     form a {
         font-size: 14px;
         color: #52B6FF;
         text-align: center;
+        font-family: 'Lexend Deca', sans-serif;
     }
 `

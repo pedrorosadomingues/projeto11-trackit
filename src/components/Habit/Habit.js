@@ -1,17 +1,20 @@
-import HabitSubtitle from "../Subtitle";
 import styled from "styled-components";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import axios from "axios";
 
-export default function Habit() {
+export default function Habit(habit) {
+    const {habits} = useContext(UserContext);
+    console.log(habits);
     return (
         <HabitStyle>
-            <HabitSubtitle/>
-            <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1>
+            <h1>Ler um livro</h1>
         </HabitStyle>
     )
 }
 
 const HabitStyle = styled.div`
-    h1:nth-child(2) {
+    h1 {
         font-size: 18px;
         color: #666666;
         font-family: 'Lexend Deca', sans-serif;

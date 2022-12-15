@@ -1,18 +1,18 @@
 import logo from "../../assets/logo.svg";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import { ThreeDots } from 'react-loader-spinner';
-import {UserContext} from "../../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 import { useContext } from "react";
 
 export default function SignInPage() {
     const [form, setForm] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
 
-    const {setUser, setPage} = useContext(UserContext);
+    const { setUser, setPage } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -25,12 +25,13 @@ export default function SignInPage() {
     function signIn(e) {
         e.preventDefault();
         setLoading(true);
-        axios.post(`${BASE_URL}login`, form)
+        axios.post(`${BASE_URL}auth/login`, form)
             .then(res => {
-                setPage("habits")
+                setPage("habits");
                 setUser(res.data);
                 navigate("/habitos");
-                console.log(res)})
+                console.log(res);
+            })
             .catch(err => {
                 setLoading(false);
                 alert(err.response.data.message)
@@ -40,13 +41,13 @@ export default function SignInPage() {
     function loadingSignIn(loading) {
         return (
             loading ?
-            <ThreeDots
-                height="80"
-                width="80"
-                radius="9"
-                color="white"
-                loading={loading}
-            /> : "Entrar"
+                <ThreeDots
+                    height="80"
+                    width="80"
+                    radius="9"
+                    color="white"
+                    loading={loading}
+                /> : "Entrar"
         )
     }
 
@@ -113,5 +114,6 @@ const SignPage = styled.div`
         font-size: 14px;
         color: #52B6FF;
         text-align: center;
+        font-family: 'Lexend Deca', sans-serif;
     }
 `

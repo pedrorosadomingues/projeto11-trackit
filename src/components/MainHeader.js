@@ -2,13 +2,14 @@ import logo2 from '../assets/logo2.svg'
 import styled from 'styled-components'
 import { useContext } from 'react'
 import { UserContext } from '../contexts/UserContext'
+import { Link } from 'react-router-dom'
 
 export default function MainHeader() { 
     const {user} = useContext(UserContext);
     console.log(user);
     return (
         <Header image={user.image}>
-            <img src={logo2} alt="logo2" />
+           <Link to="/"><img src={logo2} alt="logo2" /> </Link>
             <div/>
         </Header>
     )
