@@ -1,7 +1,17 @@
-export default function Historic() {
+import MainHeader from "../MainHeader";
+import MainFooter from "../MainFooter";
+import styled from "styled-components";
+
+export default function HistoricPage() {
     return (
-        <div>
-            <h1>Historic</h1>
-        </div>
+        <Historic>
+            <MainHeader/>
+            <h1>Historico</h1>
+            <MainFooter/>
+        </Historic>
     )
 }
+
+const Historic = styled.div`
+
+`

@@ -1,7 +1,17 @@
+import MainHeader from "../MainHeader";
+import MainFooter from "../MainFooter";
+import styled from "styled-components";
+
 export default function TodayPage() {
     return (
-        <div>
+        <Today>
+            <MainHeader/>
             <h1>Today</h1>
-        </div>
+            <MainFooter/>
+        </Today>
     )
 }
+
+const Today = styled.div`
+
+`
