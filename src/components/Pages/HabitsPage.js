@@ -19,21 +19,16 @@ export default function HabitsPage() {
     useEffect(() => {
         setPage("habits");
         axios.get(`${BASE_URL}habits`, config)
-            .then((res) => {          
-                setHabits(res.data)
-                console.log(habits)
-            })
+            .then((res) => setHabits(res.data))
             .catch((err) => console.log(err.response.data))
-
     }, [])
-
 
     return (
         <Habits>
             <MainHeader />
             <Subtitle />
             {habits.length === 0 && <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>}
-            {habits.map((h) => <Habit habit={h} />)}
+            {habits.map((h,index) => <Habit key={index} habit={h} />)}
             <MainFooter />
         </Habits>
     )

@@ -1,24 +1,29 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
-export default function DayButton({ day, setForm, form, index, loading }) {
-    const [selected, setSelected] = useState(false);
+export default function DayButton({ day, setForm, form, index, loadingAnimation, selected}) {
+    const { weekdays, setWeekdays } = useContext(UserContext);
+
+    let localWeekdays = [...weekdays];
 
     function selectDay(e) {
         e.preventDefault();
-        console.log(form.days);
+        localWeekdays[index-1].selected = !localWeekdays[index-1].selected;
+        console.log(index)
         let localArray = [...form.days];
+        
         if (localArray.includes(index)) {
             localArray = localArray.filter((d) => d !== index);
             setForm({ ...form, days: localArray });
-            setSelected(!selected);
+            setWeekdays(localWeekdays);
             return;
         }
         setForm({ ...form, days: [...form.days, index] })
-        setSelected(!selected);
+        setWeekdays(localWeekdays);
     }
     return (
-        <Button disabled={loading} selected={selected} onClick={(e) => selectDay(e)}>
+        <Button disabled={loadingAnimation} selected={selected} onClick={(e) => selectDay(e)}>
             {day}
         </Button>
     )

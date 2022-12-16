@@ -7,7 +7,6 @@ export default function Subtitle() {
     const [openSaveHabit, setOpenSaveHabit] = useState(false);
     const { page } = useContext(UserContext);
 
-
     return (
         <>
             <Subtitlestyle>
@@ -25,7 +24,6 @@ export default function Subtitle() {
         </>
     )
 }
-
 
 const Subtitlestyle = styled.div`
     display: flex;

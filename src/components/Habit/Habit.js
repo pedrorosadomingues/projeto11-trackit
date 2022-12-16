@@ -1,19 +1,25 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import axios from "axios";
 
-export default function Habit(habit) {
+
+export default function Habit({habit}) {
     const {habits} = useContext(UserContext);
-    console.log(habits);
+    console.log(habit);
     return (
         <HabitStyle>
-            <h1>Ler um livro</h1>
+            <h1>{habit.name}</h1>
+            
         </HabitStyle>
     )
 }
 
 const HabitStyle = styled.div`
+    width: 340px;
+    height: 91px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    margin: 10px auto;
     h1 {
         font-size: 18px;
         color: #666666;

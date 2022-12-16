@@ -15,7 +15,6 @@ export default function SignUpPage() {
     function handleForm(e) {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
-        console.log(form);
     }
 
     function signUp(e) {

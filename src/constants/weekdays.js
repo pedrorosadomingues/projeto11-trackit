@@ -1,1 +1,1 @@
-export const DAYS = ["S", "T", "Q", "Q", "S", "S", "D"];
+export const DAYS = [{name: "S", selected: false}, {name: "T", selected: false}, {name: "Q", selected: false}, {name: "Q", selected: false}, {name: "S", selected: false}, {name: "S", selected: false}, {name: "D", selected: false}];

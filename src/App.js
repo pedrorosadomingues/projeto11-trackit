@@ -7,14 +7,16 @@ import HistoricPage from "./components/Pages/HistoricPage";
 import styled from "styled-components";
 import { useState } from "react";
 import { UserContext } from "./contexts/UserContext";
+import { DAYS } from "./constants/weekdays";
 
 export default function App() {
   const [user, setUser] = useState({ email: "", password: "", name: "", image: "", token: "", id: "" });
   const [page, setPage] = useState("login");
   const [habits, setHabits] = useState([]);
+  const [weekdays, setWeekdays] = useState([...DAYS]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, page, setPage, habits, setHabits }}>
+    <UserContext.Provider value={{ user, setUser, page, setPage, habits, setHabits, weekdays, setWeekdays }}>
       <TrackIt>
         <BrowserRouter>
           <Routes>

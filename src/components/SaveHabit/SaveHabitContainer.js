@@ -1,43 +1,51 @@
 import styled from "styled-components";
 import DayButton from "./DayButton";
-import { DAYS } from "../../constants/weekdays";
 import { useState, useContext } from "react";
 import axios from "axios";
-import { UserContext } from "../../contexts/UserContext";   
+import { UserContext } from "../../contexts/UserContext";
 import { BASE_URL } from "../../constants/urls";
 import { ThreeDots } from 'react-loader-spinner';
 
 
-export default function SaveHabitContainer({openSaveHabit, setOpenSaveHabit}) {
+
+export default function SaveHabitContainer({ openSaveHabit, setOpenSaveHabit, }) {
     const [form, setForm] = useState({ name: "", days: [] });
     const [loading, setLoading] = useState(false);
-    const { user, setHabits, habits, } = useContext(UserContext);
+    const { user, setHabits, habits, setWeekdays, weekdays, setDays } = useContext(UserContext);
+
+    let localDays = [{name: "S", selected: false}, {name: "T", selected: false}, {name: "Q", selected: false}, {name: "Q", selected: false}, {name: "S", selected: false}, {name: "S", selected: false}, {name: "D", selected: false}];
 
     function handleForm(value) {
         setForm({ ...form, name: value });
-        console.log(form);
     }
     function saveHabit(e) {
         e.preventDefault();
         const config = {
             headers: {
-                authorization: `Bearer ${user.token}` 
+                authorization: `Bearer ${user.token}`
             }
         }
         setLoading(true);
         axios.post(`${BASE_URL}habits`, form, config)
             .then(res => {
+                console.log(weekdays)
                 axios.get(`${BASE_URL}habits`, config)
-            .then((res) => {
-                setOpenSaveHabit(false)          
-                setHabits(res.data)
-                setLoading(false);
-                setForm({ name: "", days: [] })
+                    .then((res) => {
+                        setOpenSaveHabit(false)
+                        setHabits(res.data)
+                        setWeekdays(localDays);
+                        setLoading(false);
+                        setForm({ name: "", days: [] })
+                        
+                    })
+                    .catch((err) => {
+                        alert(err.response.data)
+                    })
             })
-            .catch((err) => {
-                setOpenSaveHabit(false)
-                console.log(err.response.data)})})
-            .catch(err => console.log(err))
+            .catch(err => {
+                alert(err)
+                setLoading(false);
+            })
     }
 
     function loadingSaveHabit(loading) {
@@ -53,13 +61,20 @@ export default function SaveHabitContainer({openSaveHabit, setOpenSaveHabit}) {
         )
     }
     return (
-        <SaveHabit onSubmit={saveHabit} openSaveHabit={openSaveHabit} loading={loading}>
-            <input disabled={loading} value={form.name}type="text" placeholder="nome do hábito" onChange={(e) => handleForm(e.target.value)} />
+        <SaveHabit onSubmit={saveHabit} openSaveHabit={openSaveHabit} loadingAnimation={loading}>
+            <input disabled={loading} value={form.name} type="text" placeholder="nome do hábito" onChange={(e) => handleForm(e.target.value)} />
             <DaysContainer openSaveHabit={openSaveHabit} >
-                {DAYS.map((d, index) => <DayButton loading={loading} setForm={setForm} form={form} day={d} key={index} index={index + 1} />)}
+                {weekdays.map((d, index) => <DayButton
+                    loadingAnimation={loading}
+                    setForm={setForm}
+                    form={form}
+                    day={d.name}
+                    key={index}
+                    index={index + 1}
+                    selected={d.selected} />)}
             </DaysContainer>
-            <FinalButtons openSaveHabit={openSaveHabit} loading={loading} >
-                <button>Cancelar</button>
+            <FinalButtons openSaveHabit={openSaveHabit} loadingAnimation={loading} >
+                <button type="button">Cancelar</button>
                 <button type="submit">{loadingSaveHabit(loading)}</button>
             </FinalButtons>
         </SaveHabit>
@@ -120,7 +135,7 @@ const FinalButtons = styled.div`
     button{
         visibility: ${props => props.openSaveHabit ? "visible" : "hidden"};
         height: ${props => props.openSaveHabit ? "35px" : "0px"}; 
-        opacity: ${props => props.loading ? 0.7 : 1};
+        opacity: ${props => props.loadingAnimation ? 0.7 : 1};
     }
     button:first-child {
         background-color: #FFFFFF;

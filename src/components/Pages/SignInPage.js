@@ -19,7 +19,6 @@ export default function SignInPage() {
     function handleForm(e) {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
-        console.log(form);
     }
 
     function signIn(e) {
@@ -30,7 +29,6 @@ export default function SignInPage() {
                 setPage("habits");
                 setUser(res.data);
                 navigate("/habitos");
-                console.log(res);
             })
             .catch(err => {
                 setLoading(false);
