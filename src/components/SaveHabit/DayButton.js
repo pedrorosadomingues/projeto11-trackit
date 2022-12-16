@@ -37,5 +37,4 @@ const Button = styled.button`
     :hover {
     cursor: pointer;
 }
-    transition: 1s;
 `

@@ -121,7 +121,6 @@ const FinalButtons = styled.div`
         visibility: ${props => props.openSaveHabit ? "visible" : "hidden"};
         height: ${props => props.openSaveHabit ? "35px" : "0px"}; 
         opacity: ${props => props.loading ? 0.7 : 1};
-        
     }
     button:first-child {
         background-color: #FFFFFF;
