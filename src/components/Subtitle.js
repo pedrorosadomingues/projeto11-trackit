@@ -20,7 +20,7 @@ export default function Subtitle() {
                     <h2>0% habitos concluidos</h2>
                 </>}
             </Subtitlestyle>
-            {openSaveHabit && <SaveHabitContainer/>
+            {<SaveHabitContainer openSaveHabit={openSaveHabit} />
             }
         </>
     )
