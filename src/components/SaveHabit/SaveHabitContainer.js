@@ -8,7 +8,7 @@ import { ThreeDots } from 'react-loader-spinner';
 
 
 
-export default function SaveHabitContainer({ openSaveHabit, setOpenSaveHabit, }) {
+export default function SaveHabitContainer({ openSaveHabit, setOpenSaveHabit }) {
     const [form, setForm] = useState({ name: "", days: [] });
     const [loading, setLoading] = useState(false);
     const { user, setHabits, habits, setWeekdays, weekdays, setDays } = useContext(UserContext);
@@ -74,7 +74,7 @@ export default function SaveHabitContainer({ openSaveHabit, setOpenSaveHabit, })
                     selected={d.selected} />)}
             </DaysContainer>
             <FinalButtons openSaveHabit={openSaveHabit} loadingAnimation={loading} >
-                <button type="button">Cancelar</button>
+                <button onClick={()=>setOpenSaveHabit(false)}type="button">Cancelar</button>
                 <button type="submit">{loadingSaveHabit(loading)}</button>
             </FinalButtons>
         </SaveHabit>
