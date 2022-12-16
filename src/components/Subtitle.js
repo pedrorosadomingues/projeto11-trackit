@@ -20,7 +20,7 @@ export default function Subtitle() {
                     <h2>0% habitos concluidos</h2>
                 </>}
             </Subtitlestyle>
-            {<SaveHabitContainer openSaveHabit={openSaveHabit} />
+            {<SaveHabitContainer openSaveHabit={openSaveHabit} setOpenSaveHabit={setOpenSaveHabit} />
             }
         </>
     )
@@ -33,7 +33,7 @@ const Subtitlestyle = styled.div`
     align-items: center;
     padding: 0 18px;
     width: 375px;
-    margin-top: 20px;
+    margin-top: 80px;
     h1 {
         font-size: 23px;
         color: #126BA5;

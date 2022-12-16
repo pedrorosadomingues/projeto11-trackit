@@ -24,6 +24,8 @@ const Header = styled.header`
     align-items: center;
     padding: 0 18px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    z-index: 1;
     div {
         width: 51px;
         height: 51px;

@@ -1,37 +1,64 @@
 import styled from "styled-components";
 import DayButton from "./DayButton";
 import { DAYS } from "../../constants/weekdays";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import { UserContext } from "../../contexts/UserContext";   
+import { BASE_URL } from "../../constants/urls";
+import { ThreeDots } from 'react-loader-spinner';
 
 
-export default function SaveHabitContainer({openSaveHabit}) {
+export default function SaveHabitContainer({openSaveHabit, setOpenSaveHabit}) {
     const [form, setForm] = useState({ name: "", days: [] });
+    const [loading, setLoading] = useState(false);
+    const { user, setHabits, habits, } = useContext(UserContext);
 
     function handleForm(value) {
         setForm({ ...form, name: value });
         console.log(form);
     }
-    function saveHabit() {
+    function saveHabit(e) {
+        e.preventDefault();
         const config = {
             headers: {
-                authorization: `Bearer `
+                authorization: `Bearer ${user.token}` 
             }
         }
+        setLoading(true);
+        axios.post(`${BASE_URL}habits`, form, config)
+            .then(res => {
+                axios.get(`${BASE_URL}habits`, config)
+            .then((res) => {
+                setOpenSaveHabit(false)          
+                setHabits(res.data)
+                setLoading(false);
+                console.log(habits)
+            })
+            .catch((err) => console.log(err.response.data))})
+            .catch(err => console.log(err))
     }
-    function transition(){
-        let saveHeight = "10px";
 
+    function loadingSaveHabit(loading) {
+        return (
+            loading ?
+                <ThreeDots
+                    height="80"
+                    width="80"
+                    radius="9"
+                    color="white"
+                    loading={loading}
+                /> : "Salvar"
+        )
     }
     return (
-        <SaveHabit onSubmit={saveHabit()} openSaveHabit={openSaveHabit}>
+        <SaveHabit onSubmit={saveHabit} openSaveHabit={openSaveHabit}>
             <input type="text" placeholder="nome do hábito" onChange={(e) => handleForm(e.target.value)} />
             <DaysContainer openSaveHabit={openSaveHabit} >
                 {DAYS.map((d, index) => <DayButton setForm={setForm} form={form} day={d} key={index} index={index + 1} />)}
             </DaysContainer>
             <FinalButtons openSaveHabit={openSaveHabit} >
                 <button>Cancelar</button>
-                <button type="submit">Salvar</button>
+                <button type="submit">{loadingSaveHabit(loading)}</button>
             </FinalButtons>
         </SaveHabit>
     )
@@ -41,7 +68,7 @@ const SaveHabit = styled.form`
     display: flex;
     flex-direction: column;
     width: 340px;
-    height: ${props => props.openSaveHabit ? "180px" : "30px"};
+    min-height: ${props => props.openSaveHabit ? "180px" : "30px"};
     background: ${props => props.openSaveHabit ? "#FFFFFF" : "transparent"};
     border-radius: 5px;
     margin: 0 auto;
@@ -105,6 +132,9 @@ const FinalButtons = styled.div`
         }
     }
     button:last-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: #52B6FF;
         width: 84px;
         height: 35px;

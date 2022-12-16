@@ -44,7 +44,8 @@ const Habits = styled.div`
     flex-direction: column;
     align-items: center;
     background: #E5E5E5;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     p {
         font-size: 18px;
         color: #666666;
