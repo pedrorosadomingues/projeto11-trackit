@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-export default function DayButton({ day, setForm, form, index }) {
+export default function DayButton({ day, setForm, form, index, loading }) {
     const [selected, setSelected] = useState(false);
 
     function selectDay(e) {
@@ -18,7 +18,7 @@ export default function DayButton({ day, setForm, form, index }) {
         setSelected(!selected);
     }
     return (
-        <Button selected={selected} onClick={(e) => selectDay(e)}>
+        <Button disabled={loading} selected={selected} onClick={(e) => selectDay(e)}>
             {day}
         </Button>
     )
@@ -33,6 +33,7 @@ const Button = styled.button`
     font-size: 20px;
     font-family: 'Lexend Deca', sans-serif;
     background: ${props => props.selected ? "#CFCFCF" : "#FFFFFF"};
+    opacity: ${props => props.loading ? "0.7" : "1"};
     :hover {
     cursor: pointer;
 }

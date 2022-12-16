@@ -32,9 +32,11 @@ export default function SaveHabitContainer({openSaveHabit, setOpenSaveHabit}) {
                 setOpenSaveHabit(false)          
                 setHabits(res.data)
                 setLoading(false);
-                console.log(habits)
+                setForm({ name: "", days: [] })
             })
-            .catch((err) => console.log(err.response.data))})
+            .catch((err) => {
+                setOpenSaveHabit(false)
+                console.log(err.response.data)})})
             .catch(err => console.log(err))
     }
 
@@ -51,12 +53,12 @@ export default function SaveHabitContainer({openSaveHabit, setOpenSaveHabit}) {
         )
     }
     return (
-        <SaveHabit onSubmit={saveHabit} openSaveHabit={openSaveHabit}>
-            <input type="text" placeholder="nome do hábito" onChange={(e) => handleForm(e.target.value)} />
+        <SaveHabit onSubmit={saveHabit} openSaveHabit={openSaveHabit} loading={loading}>
+            <input disabled={loading} value={form.name}type="text" placeholder="nome do hábito" onChange={(e) => handleForm(e.target.value)} />
             <DaysContainer openSaveHabit={openSaveHabit} >
-                {DAYS.map((d, index) => <DayButton setForm={setForm} form={form} day={d} key={index} index={index + 1} />)}
+                {DAYS.map((d, index) => <DayButton loading={loading} setForm={setForm} form={form} day={d} key={index} index={index + 1} />)}
             </DaysContainer>
-            <FinalButtons openSaveHabit={openSaveHabit} >
+            <FinalButtons openSaveHabit={openSaveHabit} loading={loading} >
                 <button>Cancelar</button>
                 <button type="submit">{loadingSaveHabit(loading)}</button>
             </FinalButtons>
@@ -74,6 +76,7 @@ const SaveHabit = styled.form`
     margin: 0 auto;
     margin-top: 20px;
     position: relative;
+    transition: 1s;
     input {
         width: 300px;
         height: 45px;
@@ -83,12 +86,15 @@ const SaveHabit = styled.form`
         padding-left: 10px;
         font-size: 20px;
         font-family: 'Lexend Deca', sans-serif;
+        color: "#D4D4D4" ;
+        background-color: ${props => props.loading ? "#F2F2F2" : "#fff"};
         visibility: ${props => props.openSaveHabit ? "visible" : "hidden"};       
         ::placeholder {
             color: #DBDBDB;
         }
-    }
-    transition: 1s;
+        
+       
+    }   
 `
 const DaysContainer = styled.div`
     display: flex;
@@ -114,8 +120,8 @@ const FinalButtons = styled.div`
     button{
         visibility: ${props => props.openSaveHabit ? "visible" : "hidden"};
         height: ${props => props.openSaveHabit ? "35px" : "0px"}; 
-        opacity: ${props => props.openSaveHabit ? "1" : "0"};
-        transition: 1s;
+        opacity: ${props => props.loading ? 0.7 : 1};
+        
     }
     button:first-child {
         background-color: #FFFFFF;
