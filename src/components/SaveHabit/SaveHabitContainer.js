@@ -41,12 +41,12 @@ const SaveHabit = styled.form`
     display: flex;
     flex-direction: column;
     width: 340px;
-    height: ${props => props.openSaveHabit ? "180px" : "0px"};
-    background: #FFFFFF;
+    height: ${props => props.openSaveHabit ? "180px" : "30px"};
+    background: ${props => props.openSaveHabit ? "#FFFFFF" : "transparent"};
     border-radius: 5px;
     margin: 0 auto;
     margin-top: 20px;
-    
+    position: relative;
     input {
         width: 300px;
         height: 45px;
@@ -70,7 +70,9 @@ const DaysContainer = styled.div`
     gap: 4px;
     padding-left: 10px;
     margin-top: 10px;
-    visibility: ${props => props.openSaveHabit ? "visible" : "hidden"};  
+    visibility: ${props => props.openSaveHabit ? "visible" : "hidden"};
+    opacity: ${props => props.openSaveHabit ? "1" : "0"};
+    transition: 1s;
     button{
         display: ${props => props.openSaveHabit ? "block" : "none"};
     } 
@@ -79,9 +81,14 @@ const FinalButtons = styled.div`
     display: flex;
     justify-content: flex-end;
     padding-top: 30px;
+    position: absolute;
+    bottom: 4px;
+    right: 0;
     button{
-        height: ${props => props.openSaveHabit ? "35px" : "0px"};
         visibility: ${props => props.openSaveHabit ? "visible" : "hidden"};
+        height: ${props => props.openSaveHabit ? "35px" : "0px"}; 
+        opacity: ${props => props.openSaveHabit ? "1" : "0"};
+        transition: 1s;
     }
     button:first-child {
         background-color: #FFFFFF;
