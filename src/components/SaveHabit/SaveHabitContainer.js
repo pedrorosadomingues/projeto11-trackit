@@ -1,17 +1,32 @@
 import styled from "styled-components";
 import DayButton from "./DayButton";
 import { DAYS } from "../../constants/weekdays";
+import { useState } from "react";
+import axios from "axios";
+
 
 export default function SaveHabitContainer() {
+    const [form, setForm] = useState({ name: "", days: [] });
+
+    function handleForm(value) {
+        setForm({ ...form, name: value });
+        console.log(form);
+    }
+    function saveHabit() {
+        const config = {
+            headers: {
+                authorization: `Bearer `
+            }
+        }}
     return (
-        <SaveHabit>
-                <input type="text" placeholder="nome do hábito" />
+        <SaveHabit onSubmit={saveHabit()}>
+                <input type="text" placeholder="nome do hábito" onChange={(e)=>handleForm(e.target.value)} />
                 <DaysContainer>
-                    {DAYS.map((d, index) => <DayButton day={d} key={index} />)}
+                    {DAYS.map((d, index) => <DayButton setForm={setForm} form={form} day={d} key={index} index={index + 1} />)}
                 </DaysContainer>
                 <FinalButtons>
                     <button>Cancelar</button>
-                    <button>Salvar</button>
+                    <button type="submit">Salvar</button>
                 </FinalButtons>
             </SaveHabit>
     )

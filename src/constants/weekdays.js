@@ -1,1 +1,1 @@
-export const DAYS = ["D", "S", "T", "Q", "Q", "S", "S"];
+export const DAYS = ["S", "T", "Q", "Q", "S", "S", "D"];
