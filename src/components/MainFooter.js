@@ -2,12 +2,15 @@ import styled from "styled-components";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export default function MainFooter() {
+    const {percentege} = useContext(UserContext);
     return (
         <Footer>
             <Link to="/habitos">Hábitos</Link>
-            <Link to="/hoje"><CircularProgressbar value={66} text="Hoje" /></Link>
+            <Link to="/hoje"><CircularProgressbar value={percentege} text="Hoje" /></Link>
             <Link to="/historico">Histórico</Link>
         </Footer>
     )

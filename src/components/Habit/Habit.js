@@ -6,21 +6,16 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 
 export default function Habit({ habit }) {
-    const { weekdays, user, setHabits } = useContext(UserContext);
-    console.log(weekdays);
-
-    function confirmDeleteHabit() {
-         if(!window.confirm("Tem certeza que deseja deletar esse hábito?")) return
-    }
-
+    const { weekdays, user, setHabits, habitsDay } = useContext(UserContext);    
     const config = {
         headers: {
             Authorization: `Bearer ${user.token}`
         }
     }
     function deleteHabit(id) {
-        console.log(id)
-        confirmDeleteHabit()
+        if (!window.confirm("Tem certeza que deseja deletar esse hábito?")) {
+            return;
+        }
         axios.delete(`${BASE_URL}habits/${id}`, config)
             .then(() => {
                 console.log("Hábito deletado com sucesso")
@@ -57,6 +52,7 @@ const HabitStyle = styled.div`
     margin: 10px auto 0 auto;
     padding:15px;
     position: relative;
+    
 
     h1 {
         font-size: 18px;

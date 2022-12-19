@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default function DayContainer({selectedDaysIndex, index, day, weekdays }) {
     let selected = selectedDaysIndex.includes(index)
-    console.log(selected);
+   
     return (
         <DayStyle selected={selected}>
             {day.name}

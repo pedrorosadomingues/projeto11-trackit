@@ -14,9 +14,12 @@ export default function App() {
   const [page, setPage] = useState("login");
   const [habits, setHabits] = useState([]);
   const [weekdays, setWeekdays] = useState([...DAYS]);
+  const [habitsDay, setHabitsDay] = useState([]);
+  const [percentege, setPercentege] = useState(0);
+
 
   return (
-    <UserContext.Provider value={{ user, setUser, page, setPage, habits, setHabits, weekdays, setWeekdays }}>
+    <UserContext.Provider value={{ user, setUser, page, setPage, habits, setHabits, weekdays, setWeekdays, habitsDay, setHabitsDay, percentege, setPercentege }}>
       <TrackIt>
         <BrowserRouter>
           <Routes>

@@ -2,10 +2,15 @@ import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import styled from "styled-components";
 import SaveHabitContainer from "./SaveHabit/SaveHabitContainer";
+import dayjs from "dayjs";
+import 'dayjs/locale/pt-br';
+
 
 export default function Subtitle() {
     const [openSaveHabit, setOpenSaveHabit] = useState(false);
-    const { page } = useContext(UserContext);
+    const { page, percentege } = useContext(UserContext);
+
+    const weekdayname = dayjs().locale('pt-br').format('dddd')[0].toUpperCase() + dayjs().locale('pt-br').format('dddd').slice(1) + ", " + dayjs().locale('pt-br').format('DD/MM');
 
     return (
         <>
@@ -14,10 +19,10 @@ export default function Subtitle() {
                     <h1>Meus hábitos</h1>
                     <button onClick={() => setOpenSaveHabit(!openSaveHabit)}>+</button>
                 </>}
-                {page === "today" && <>
-                    <h1>Hoje</h1>
-                    <h2>0% habitos concluidos</h2>
-                </>}
+                {page === "today" && <TextSubtitle>
+                    <h1>{weekdayname}</h1>
+                    <h2>{percentege.toFixed()}% habitos concluidos</h2>
+                </TextSubtitle>}
             </Subtitlestyle>
             {<SaveHabitContainer openSaveHabit={openSaveHabit} setOpenSaveHabit={setOpenSaveHabit} />
             }
@@ -54,5 +59,10 @@ const Subtitlestyle = styled.div`
             cursor: pointer;
     }
 }`
+const TextSubtitle = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+`
 
 

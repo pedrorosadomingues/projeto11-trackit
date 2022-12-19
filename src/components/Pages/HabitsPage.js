@@ -9,7 +9,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 
 export default function HabitsPage() {
-    const { habits, setHabits, user, setPage } = useContext(UserContext); 
+    const { habits, setHabits, user, setPage, habitsDay } = useContext(UserContext); 
 
     const config = {
         headers: {
@@ -41,6 +41,7 @@ const Habits = styled.div`
     background: #E5E5E5;
     min-height: 100vh;
     height: 100%;
+    margin-bottom: 70px;
     p {
         font-size: 18px;
         color: #666666;
