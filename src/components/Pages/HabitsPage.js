@@ -9,7 +9,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 
 export default function HabitsPage() {
-    const { habits, setHabits, user, setPage, habitsDay } = useContext(UserContext); 
+    const { habits, setHabits, user, setPage, setPercentege } = useContext(UserContext);
 
     const config = {
         headers: {
@@ -20,7 +20,19 @@ export default function HabitsPage() {
         setPage("habits");
         axios.get(`${BASE_URL}habits`, config)
             .then((res) => setHabits(res.data))
-            .catch((err) => console.log(err.response.data))
+            .catch((err) => console.log(err.response.data));
+        axios.get(`${BASE_URL}/habits/today`, config)
+            .then((res) => {
+                let percentege = 0;
+                res.data.forEach((h) => {
+                    if (h.done) {
+                        percentege += 100 / res.data.length;
+                    }
+                }
+                )
+                setPercentege(percentege);
+            })
+            .catch((err) => alert(err));
     }, [])
 
     return (
@@ -28,7 +40,7 @@ export default function HabitsPage() {
             <MainHeader />
             <Subtitle />
             {habits.length === 0 && <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>}
-            {habits.map((h,index) => <Habit key={index} habit={h} />)}
+            {habits.map((h, index) => <Habit key={index} habit={h} />)}
             <MainFooter />
         </Habits>
     )
@@ -38,7 +50,7 @@ const Habits = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #E5E5E5;
+    background: #F2F2F2;
     min-height: 100vh;
     height: 100%;
     margin-bottom: 70px;

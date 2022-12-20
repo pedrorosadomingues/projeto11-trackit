@@ -9,14 +9,14 @@ import { BASE_URL } from "../../constants/urls";
 import HabitDay from "../HabitDay";
 
 export default function TodayPage() {
-    const {setPage, habitsDay, setHabitsDay, user} = useContext(UserContext);
+    const {setPage, habitsDay, setHabitsDay, user, percentege} = useContext(UserContext);
     const config = {
         headers: { Authorization: `Bearer ${user.token}` }
     }  
     console.log(habitsDay)
     useEffect(() => {
         setPage("today");
-        axios.get(`${BASE_URL}/habits/today`, config)
+        axios.get(`${BASE_URL}habits/today`, config)
         .then((res) => {
             setHabitsDay(res.data)           
         })
@@ -33,5 +33,6 @@ export default function TodayPage() {
 }
 
 const Today = styled.div`
-
+    margin-bottom: 70px;
+    background-color: #F2F2F2;
 `

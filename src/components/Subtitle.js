@@ -43,6 +43,12 @@ const Subtitlestyle = styled.div`
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
     }
+    h2 {
+        font-size: 18px;
+        color: #8FC549;
+        font-family: 'Lexend Deca', sans-serif;
+        font-weight: 400;
+    }
     button {
         width: 40px;
         height: 35px;
