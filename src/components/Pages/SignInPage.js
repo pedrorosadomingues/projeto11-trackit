@@ -26,9 +26,9 @@ export default function SignInPage() {
         setLoading(true);
         axios.post(`${BASE_URL}auth/login`, form)
             .then(res => {
-                setPage("habits");
+                setPage("today");
                 setUser(res.data);
-                navigate("/habitos");
+                navigate("/hoje");
             })
             .catch(err => {
                 setLoading(false);

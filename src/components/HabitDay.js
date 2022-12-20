@@ -20,13 +20,15 @@ export default function HabitDay({ habit, habitsLength }) {
 
     function checkHabit(id, habit) {
         setHabitIsDone(!habitIsDone);
+        console.log(habit)
         let addPercentege = percentege + 100 / habitsLength;
         let removePercentege = percentege - 100 / habitsLength;
+        let localCurrentSequence = currentSequence;
 
         if (!habit) {
             setPercentege(addPercentege)
-            setCurrentSequence(currentSequence + 1)
-            if (currentSequence === highestSequence) {
+            setCurrentSequence(localCurrentSequence + 1)
+            if (localCurrentSequence === highestSequence) {
                 setHighestSequence(highestSequence + 1)
                 setIsHighestSequence(true)
             }
