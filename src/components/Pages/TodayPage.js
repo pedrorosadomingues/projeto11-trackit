@@ -21,7 +21,7 @@ export default function TodayPage() {
             setHabitsDay(res.data)           
         })
         .catch((err) => alert(err));
-    }, []);
+    }, [percentege]);
     return (
         <Today>
             <MainHeader/>

@@ -10,7 +10,8 @@ export default function MainHeader() {
     return (
         <Header image={user.image}>
            <Link to="/"><img src={logo2} alt="logo2" /></Link>
-           <p>Olá, {user.name}</p>
+           <p>Olá, {user.name[0].toUpperCase() + user.name.slice(1).toLowerCase()
+           }</p>
             <div/>
         </Header>
     )

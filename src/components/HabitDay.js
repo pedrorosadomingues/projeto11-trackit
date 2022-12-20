@@ -10,7 +10,7 @@ export default function HabitDay({ habit, habitsLength }) {
     const [currentSequence, setCurrentSequence] = useState(habit.currentSequence);
     const [highestSequence, setHighestSequence] = useState(habit.highestSequence);
     const [isHighestSequence, setIsHighestSequence] = useState(habit.currentSequence === habit.highestSequence && highestSequence > 0);
-    const { setPercentege, habitsDay, percentege, user } = useContext(UserContext);
+    const { setPercentege, setHabitsDay, percentege, user } = useContext(UserContext);
 
     const config = {
         headers: {
@@ -31,7 +31,13 @@ export default function HabitDay({ habit, habitsLength }) {
                 setIsHighestSequence(true)
             }
             axios.post(`${BASE_URL}habits/${id}/check`, {}, config)
-                .then((res) => console.log(res.data))
+                .then((res) => axios.get(`${BASE_URL}habits/today`, config)
+                    .then((res) => {
+                        setHabitsDay(res.data)
+                    })
+                    .catch((err) => {
+                        alert(err.response.data)
+                    }))
                 .catch((err) => {
                     return alert(err.response.data)
                 })
