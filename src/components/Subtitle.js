@@ -14,14 +14,14 @@ export default function Subtitle() {
 
     return (
         <>
-            <Subtitlestyle>
+            <Subtitlestyle percentege={percentege}>
                 {page === "habits" && <>
                     <h1>Meus hábitos</h1>
                     <button onClick={() => setOpenSaveHabit(!openSaveHabit)}>+</button>
                 </>}
                 {page === "today" && <TextSubtitle>
                     <h1>{weekdayname}</h1>
-                    <h2>{percentege.toFixed()}% habitos concluidos</h2>
+                    <h2>{percentege===0 ? "Nenhum hábito concluído ainda" : `${percentege.toFixed()}% hábitos concluídos`}</h2>
                 </TextSubtitle>}
             </Subtitlestyle>
             {<SaveHabitContainer openSaveHabit={openSaveHabit} setOpenSaveHabit={setOpenSaveHabit} />
@@ -45,7 +45,7 @@ const Subtitlestyle = styled.div`
     }
     h2 {
         font-size: 18px;
-        color: #8FC549;
+        color: ${ props => props.percentege===0 ? "#BABABA" :  "#8FC549"};
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
     }

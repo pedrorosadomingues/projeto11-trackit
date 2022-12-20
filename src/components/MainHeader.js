@@ -9,7 +9,8 @@ export default function MainHeader() {
     
     return (
         <Header image={user.image}>
-           <Link to="/"><img src={logo2} alt="logo2" /> </Link>
+           <Link to="/"><img src={logo2} alt="logo2" /></Link>
+           <p>Olá, {user.name}</p>
             <div/>
         </Header>
     )
@@ -26,6 +27,14 @@ const Header = styled.header`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     position: fixed;
     z-index: 1;
+    p{
+        color: #BABABA;
+        font-size: 20px;
+        font-family: 'Lexend Deca', sans-serif;
+        font-weight: 400;
+        line-height: 25px;
+        margin-left: 80px;
+    }
     div {
         width: 51px;
         height: 51px;

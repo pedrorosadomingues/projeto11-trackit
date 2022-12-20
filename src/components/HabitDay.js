@@ -6,42 +6,56 @@ import { BASE_URL } from "../constants/urls";
 
 
 export default function HabitDay({ habit, habitsLength }) {
-const [habitIsDone, setHabitIsDone] = useState(habit.done);
-const { setPercentege, habitsDay, percentege, user } = useContext(UserContext);
+    const [habitIsDone, setHabitIsDone] = useState(habit.done);
+    const [currentSequence, setCurrentSequence] = useState(habit.currentSequence);
+    const [highestSequence, setHighestSequence] = useState(habit.highestSequence);
+    const [isHighestSequence, setIsHighestSequence] = useState(habit.currentSequence === habit.highestSequence && highestSequence > 0);
+    const { setPercentege, habitsDay, percentege, user } = useContext(UserContext);
 
-const config = {
-    headers: {
-        Authorization: `Bearer ${user.token}`
-}
-}
-
-function checkHabit(id, habit) {
-    setHabitIsDone(!habitIsDone);
-    let addPercentege = percentege + 100 / habitsLength;
-    let removePercentege = percentege - 100 / habitsLength;
-    console.log(habit)
-    if (!habit) {
-        setPercentege(addPercentege)
-        axios.post(`${BASE_URL}habits/${id}/check`, {}, config)
-            .then((res) => console.log(res.data))
-            .catch((err) => {
-                return alert(err.response.data)})
-     } else {
-        setPercentege(removePercentege)
-        axios.post(`${BASE_URL}habits/${id}/uncheck`, {}, config)
-        .then((res) => console.log(res.data))
-        .catch((err) => {return alert(err.response.data)})
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`
+        }
     }
-}
+
+    function checkHabit(id, habit) {
+        setHabitIsDone(!habitIsDone);
+        let addPercentege = percentege + 100 / habitsLength;
+        let removePercentege = percentege - 100 / habitsLength;
+
+        if (!habit) {
+            setPercentege(addPercentege)
+            setCurrentSequence(currentSequence + 1)
+            if (currentSequence === highestSequence) {
+                setHighestSequence(highestSequence + 1)
+                setIsHighestSequence(true)
+            }
+            axios.post(`${BASE_URL}habits/${id}/check`, {}, config)
+                .then((res) => console.log(res.data))
+                .catch((err) => {
+                    return alert(err.response.data)
+                })
+        } else {
+            setPercentege(removePercentege)
+            setCurrentSequence(currentSequence - 1)
+            if (currentSequence === highestSequence) {
+                setHighestSequence(highestSequence - 1)
+                setIsHighestSequence(false)
+            }
+            axios.post(`${BASE_URL}habits/${id}/uncheck`, {}, config)
+                .then((res) => console.log(res.data))
+                .catch((err) => { return alert(err.response.data) })
+        }
+    }
 
     return (
-        <HabitDayContainer habitIsDone={habitIsDone}>
+        <HabitDayContainer habitIsDone={habitIsDone} isHighestSequence={isHighestSequence} >
             <TextHabitDay>
                 <h1>{habit.name}</h1>
-                <p>Sequencia atual: {habit.currentSequence}dias</p>
-                <p>Seu recorde: {habit.highestSequence} dias</p>
+                <p>Sequencia atual: <span>{currentSequence} dias</span></p>
+                <p>Seu recorde: <span>{highestSequence} dias</span></p>
             </TextHabitDay>
-            <ion-icon onClick={()=>checkHabit(habit.id, habitIsDone)} name="checkmark-outline"></ion-icon>
+            <ion-icon onClick={() => checkHabit(habit.id, habitIsDone)} name="checkmark-outline"></ion-icon>
 
         </HabitDayContainer>
     )
@@ -67,6 +81,12 @@ p{
     color: #666666;
     font-family: 'Lexend Deca', sans-serif;
     line-height: 15px;
+}
+span:nth-child(0){
+    color: ${props => props.habitIsDone ? "#8FC549" : "#666666"}
+}
+span:nth-child(1){
+    color: ${props => props.isHighestSequence ? "#8FC549" : "#666666"}
 }
 ion-icon {
     color: white;
