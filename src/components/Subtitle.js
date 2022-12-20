@@ -17,11 +17,11 @@ export default function Subtitle() {
             <Subtitlestyle percentege={percentege}>
                 {page === "habits" && <>
                     <h1>Meus hábitos</h1>
-                    <button onClick={() => setOpenSaveHabit(!openSaveHabit)}>+</button>
+                    <button data-test="habit-create-btn" onClick={() => setOpenSaveHabit(!openSaveHabit)}>+</button>
                 </>}
                 {page === "today" && <TextSubtitle>
-                    <h1>{weekdayname}</h1>
-                    <h2>{percentege===0 ? "Nenhum hábito concluído ainda" : `${percentege.toFixed()}% hábitos concluídos`}</h2>
+                    <h1 data-test="today">{weekdayname}</h1>
+                    <h2 data-test="today-counter" >{percentege===0 ? "Nenhum hábito concluído ainda" : `${percentege.toFixed()}% hábitos concluídos`}</h2>
                 </TextSubtitle>}
                 {page === "historic" && <>
                     <h1>Histórico</h1>

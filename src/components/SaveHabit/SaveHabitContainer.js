@@ -61,8 +61,8 @@ export default function SaveHabitContainer({ openSaveHabit, setOpenSaveHabit }) 
         )
     }
     return (
-        <SaveHabit onSubmit={saveHabit} openSaveHabit={openSaveHabit} loadingAnimation={loading}>
-            <input disabled={loading} value={form.name} type="text" placeholder="nome do hábito" onChange={(e) => handleForm(e.target.value)} />
+        <SaveHabit  data-test="habit-create-container" onSubmit={saveHabit} openSaveHabit={openSaveHabit} loadingAnimation={loading}>
+            <input data-test="habit-name-input" disabled={loading} value={form.name} type="text" placeholder="nome do hábito" onChange={(e) => handleForm(e.target.value)} />
             <DaysContainer openSaveHabit={openSaveHabit} >
                 {weekdays.map((d, index) => <DayButton
                     loadingAnimation={loading}
@@ -74,8 +74,8 @@ export default function SaveHabitContainer({ openSaveHabit, setOpenSaveHabit }) 
                     selected={d.selected} />)}
             </DaysContainer>
             <FinalButtons openSaveHabit={openSaveHabit} loadingAnimation={loading} >
-                <button onClick={()=>setOpenSaveHabit(false)}type="button">Cancelar</button>
-                <button type="submit">{loadingSaveHabit(loading)}</button>
+                <button data-test="habit-create-cancel-btn" onClick={()=>setOpenSaveHabit(false)}type="button">Cancelar</button>
+                <button data-test="habit-create-save-btn" type="submit">{loadingSaveHabit(loading)}</button>
             </FinalButtons>
         </SaveHabit>
     )

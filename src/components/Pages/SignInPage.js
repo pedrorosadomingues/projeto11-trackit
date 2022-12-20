@@ -53,11 +53,11 @@ export default function SignInPage() {
         <SignPage loadingAnimation={loading}>
             <img src={logo} alt="logo" />
             <form onSubmit={signIn}>
-                <input disabled={loading} name="email" type="email" placeholder="email" onChange={e => handleForm(e)} />
-                <input disabled={loading} name="password" type="password" placeholder="senha" onChange={e => handleForm(e)} />
-                <button disabled={loading} type="submit">{loadingSignIn(loading)}</button>
+                <input data-test="email-input" disabled={loading} name="email" type="email" placeholder="email" onChange={e => handleForm(e)} />
+                <input data-test="password-input" disabled={loading} name="password" type="password" placeholder="senha" onChange={e => handleForm(e)} />
+                <button data-test="login-btn" disabled={loading} type="submit">{loadingSignIn(loading)}</button>
                 <Link to="/cadastro">
-                    <p>Não tem uma conta? Cadastre-se!</p>
+                    <p data-test="signup-link" >Não tem uma conta? Cadastre-se!</p>
                 </Link>
             </form>
         </SignPage>

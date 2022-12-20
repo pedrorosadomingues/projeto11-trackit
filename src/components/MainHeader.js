@@ -8,7 +8,7 @@ export default function MainHeader() {
     const {user} = useContext(UserContext);
     
     return (
-        <Header image={user.image}>
+        <Header data-test="header" image={user.image}>
            <Link to="/"><img src={logo2} alt="logo2" /></Link>
            <p>Olá, {user.name[0].toUpperCase() + user.name.slice(1).toLowerCase()
            }</p>

@@ -8,10 +8,10 @@ import { UserContext } from "../contexts/UserContext";
 export default function MainFooter() {
     const {percentege} = useContext(UserContext);
     return (
-        <Footer>
-            <Link to="/habitos">Hábitos</Link>
-            <Link to="/hoje"><CircularProgressbar value={percentege} text="Hoje" /></Link>
-            <Link to="/historico">Histórico</Link>
+        <Footer data-test="menu">
+            <div data-test="habit-link"><Link to="/habitos">Hábitos</Link></div>
+            <div data-test="today-link"><Link to="/hoje"><CircularProgressbar value={percentege} text="Hoje" /></Link></div>
+            <div data-test="history-link"><Link to="/historico">Histórico</Link></div>
         </Footer>
     )
 }

@@ -55,13 +55,13 @@ export default function HabitDay({ habit, habitsLength }) {
     }
 
     return (
-        <HabitDayContainer habitIsDone={habitIsDone} isHighestSequence={isHighestSequence} >
+        <HabitDayContainer data-test="today-habit-container" habitIsDone={habitIsDone} isHighestSequence={isHighestSequence} >
             <TextHabitDay>
-                <h1>{habit.name}</h1>
-                <p>Sequencia atual: <span>{currentSequence} dias</span></p>
-                <p>Seu recorde: <span>{highestSequence} dias</span></p>
+                <h1 data-test="today-habit-name">{habit.name}</h1>
+                <p data-test="today-habit-sequence">Sequencia atual: <span>{currentSequence} dias</span></p>
+                <p data-test="today-habit-record">Seu recorde: <span>{highestSequence} dias</span></p>
             </TextHabitDay>
-            <ion-icon onClick={() => checkHabit(habit.id, habitIsDone)} name="checkmark-outline"></ion-icon>
+            <div data-test="today-habit-check-btn"><ion-icon onClick={() => checkHabit(habit.id, habitIsDone)} name="checkmark-outline"></ion-icon></div>
 
         </HabitDayContainer>
     )

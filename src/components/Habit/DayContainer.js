@@ -4,7 +4,7 @@ export default function DayContainer({selectedDaysIndex, index, day, weekdays })
     let selected = selectedDaysIndex.includes(index)
    
     return (
-        <DayStyle selected={selected}>
+        <DayStyle data-test="habit-day" selected={selected}>
             {day.name}
         </DayStyle>
     )

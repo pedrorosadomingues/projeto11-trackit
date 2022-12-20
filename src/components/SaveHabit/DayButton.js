@@ -23,7 +23,7 @@ export default function DayButton({ day, setForm, form, index, loadingAnimation,
         setWeekdays(localWeekdays);
     }
     return (
-        <Button disabled={loadingAnimation} selected={selected} onClick={(e) => selectDay(e)}>
+        <Button data-test="habit-day" disabled={loadingAnimation} selected={selected} onClick={(e) => selectDay(e)}>
             {day}
         </Button>
     )

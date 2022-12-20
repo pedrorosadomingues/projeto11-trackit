@@ -47,13 +47,13 @@ export default function SignUpPage() {
         <SignPage>
             <img src={logo} alt="logo" />
             <form onSubmit={signUp}>
-                <input name="email" type="email" placeholder="email" onChange={e => handleForm(e)} />
-                <input name="password" type="password" placeholder="senha" onChange={e => handleForm(e)} />
-                <input name="name" type="text" placeholder="nome" onChange={e => handleForm(e)} />
-                <input name="image" type="text" placeholder="foto" onChange={e => handleForm(e)} />
-                <button type="submit">{loadingSignUp(loading)}</button>
+                <input data-test="email-input" name="email" type="email" placeholder="email" onChange={e => handleForm(e)} />
+                <input data-test="password-input" name="password" type="password" placeholder="senha" onChange={e => handleForm(e)} />
+                <input data-test="user-name-input" name="name" type="text" placeholder="nome" onChange={e => handleForm(e)} />
+                <input data-test="user-image-input" name="image" type="text" placeholder="foto" onChange={e => handleForm(e)} />
+                <button data-test="signup-btn" type="submit">{loadingSignUp(loading)}</button>
                 <Link to="/">
-                    <p>Já tem uma conta? Faça login!</p>
+                    <p data-test="login-link">Já tem uma conta? Faça login!</p>
                 </Link>
             </form>
 

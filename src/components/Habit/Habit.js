@@ -30,15 +30,15 @@ export default function Habit({ habit }) {
             .catch(() => alert("Não foi possível deletar o hábito"))
     }
     return (
-        <HabitStyle>
-            <h1>{habit.name}</h1>
+        <HabitStyle data-test="habit-container">
+            <h1 data-test="habit-name">{habit.name}</h1>
             <DaysContainerStyle>
                 {weekdays.map((d, index) => {
                     return <DayContainer key={index} index={index + 1} day={d} selectedDaysIndex={habit.days} />
                 })}
             </DaysContainerStyle>
 
-            <ion-icon onClick={() => deleteHabit(habit.id)} name="trash-outline"></ion-icon>
+            <div data-test="habit-delete-btn"><ion-icon onClick={() => deleteHabit(habit.id)} name="trash-outline"></ion-icon></div>
 
         </HabitStyle>
     )
