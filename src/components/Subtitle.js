@@ -23,6 +23,9 @@ export default function Subtitle() {
                     <h1>{weekdayname}</h1>
                     <h2>{percentege===0 ? "Nenhum hábito concluído ainda" : `${percentege.toFixed()}% hábitos concluídos`}</h2>
                 </TextSubtitle>}
+                {page === "historic" && <>
+                    <h1>Histórico</h1>
+                </>}
             </Subtitlestyle>
             {<SaveHabitContainer openSaveHabit={openSaveHabit} setOpenSaveHabit={setOpenSaveHabit} />
             }

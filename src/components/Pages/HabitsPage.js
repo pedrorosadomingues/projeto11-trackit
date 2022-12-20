@@ -39,7 +39,7 @@ export default function HabitsPage() {
         <Habits>
             <MainHeader />
             <Subtitle />
-            {habits.length === 0 && <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>}
+            {habits.length === 0 && <TextNoHabit>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</TextNoHabit>}
             {habits.map((h, index) => <Habit key={index} habit={h} />)}
             <MainFooter />
         </Habits>
@@ -54,7 +54,8 @@ const Habits = styled.div`
     min-height: 100vh;
     height: 100%;
     margin-bottom: 70px;
-    p {
+`
+const TextNoHabit = styled.p`
         font-size: 18px;
         color: #666666;
         font-family: 'Lexend Deca', sans-serif;
@@ -64,5 +65,4 @@ const Habits = styled.div`
         padding: 0 18px;
         max-width: 375px;
         text-align: start;
-    }
 `
