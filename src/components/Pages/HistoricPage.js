@@ -25,8 +25,7 @@ export default function HistoricPage() {
 }
 
 const Historic = styled.div`
-    margin: 70px auto 70px auto;
-
+    margin: 0 auto 70px auto;
     h1 {
         font-size: 18px;
         color: #666666;
