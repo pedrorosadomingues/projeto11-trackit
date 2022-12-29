@@ -20,6 +20,10 @@ export default function SaveHabitContainer({ openSaveHabit, setOpenSaveHabit }) 
     }
     function saveHabit(e) {
         e.preventDefault();
+        if (form.name === "") {
+            alert("Digite um nome para o hábito!")
+            return;
+        }
         if (form.days.length === 0) {
             alert("Selecione ao menos um dia da semana!")
             return;
