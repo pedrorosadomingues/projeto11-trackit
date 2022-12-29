@@ -55,8 +55,7 @@ const Habits = styled.div`
     flex-direction: column;
     align-items: center;
     background: #F2F2F2;
-    min-height: 100vh;
-    height: 100%;
+    min-height: calc(100vh - 70px);
     margin-bottom: 70px;
 `
 const TextNoHabit = styled.p`

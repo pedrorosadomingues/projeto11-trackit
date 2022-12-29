@@ -44,5 +44,5 @@ export default function TodayPage() {
 const Today = styled.div`
     margin-bottom: 70px;
     background-color: #F2F2F2;
-    min-height: 685px;
+    min-height: calc(100vh - 70px);
 `
