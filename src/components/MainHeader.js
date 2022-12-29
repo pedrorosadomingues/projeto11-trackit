@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 
 export default function MainHeader() { 
     const {user} = useContext(UserContext);
+    let userName = user.name[0].toUpperCase() + user.name.slice(1).toLowerCase()
     
     return (
         <Header data-test="header" image={user.image}>
            <Link to="/"><img src={logo2} alt="logo2" /></Link>
-           <p>Olá, {user.name[0].toUpperCase() + user.name.slice(1).toLowerCase()
-           }</p>
+           <p>Olá, {userName}</p>
             <div/>
         </Header>
     )

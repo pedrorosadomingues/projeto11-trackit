@@ -20,6 +20,10 @@ export default function SaveHabitContainer({ openSaveHabit, setOpenSaveHabit }) 
     }
     function saveHabit(e) {
         e.preventDefault();
+        if (form.days.length === 0) {
+            alert("Selecione ao menos um dia da semana!")
+            return;
+        }
         const config = {
             headers: {
                 authorization: `Bearer ${user.token}`

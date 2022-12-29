@@ -9,13 +9,17 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 
 export default function HabitsPage() {
-    const { habits, setHabits, user, setPage, setPercentege } = useContext(UserContext);
+    const { habits, setHabits, user, setPage, setPercentege, weekdays } = useContext(UserContext);
 
     const config = {
         headers: {
             Authorization: `Bearer ${user.token}`
         }
     }
+
+    const reverseHabits = [...habits].reverse(); 
+    console.log(reverseHabits)
+
     useEffect(() => {
         setPage("habits");
         axios.get(`${BASE_URL}habits`, config)
@@ -33,14 +37,14 @@ export default function HabitsPage() {
                 setPercentege(percentege);
             })
             .catch((err) => alert(err));
-    }, [])
+    }, [weekdays])
 
     return (
         <Habits>
             <MainHeader />
             <Subtitle />
             {habits.length === 0 && <TextNoHabit>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</TextNoHabit>}
-            {habits.map((h, index) => <Habit key={index} habit={h} />)}
+            {reverseHabits.map((h, index) => <Habit key={index} habit={h} />)}
             <MainFooter />
         </Habits>
     )

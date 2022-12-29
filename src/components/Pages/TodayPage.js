@@ -9,7 +9,7 @@ import { BASE_URL } from "../../constants/urls";
 import HabitDay from "../HabitDay";
 
 export default function TodayPage() {
-    const {setPage, habitsDay, setHabitsDay, user, percentege} = useContext(UserContext);
+    const {setPage, habitsDay, setHabitsDay, user, setPercentege} = useContext(UserContext);
     const config = {
         headers: { Authorization: `Bearer ${user.token}` }
     }  
@@ -18,10 +18,19 @@ export default function TodayPage() {
         setPage("today");
         axios.get(`${BASE_URL}habits/today`, config)
         .then((res) => {
-            setHabitsDay(res.data)           
+            setHabitsDay(res.data)
+            let percentege = 0;
+            res.data.forEach((h) => {
+                if (h.done) {
+                    percentege += 100 / res.data.length;
+                }
+            }
+            )
+            setPercentege(percentege);           
         })
         .catch((err) => alert(err));
-    }, [percentege]);
+
+    }, []);
     return (
         <Today>
             <MainHeader/>
@@ -35,4 +44,5 @@ export default function TodayPage() {
 const Today = styled.div`
     margin-bottom: 70px;
     background-color: #F2F2F2;
+    min-height: 685px;
 `

@@ -6,7 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 
 export default function Habit({ habit }) {
-    const { weekdays, user, setHabits, habitsDay } = useContext(UserContext);    
+    const { setWeekdays, weekdays, user, setHabits, habitsDay, setPercentege } = useContext(UserContext);
     const config = {
         headers: {
             Authorization: `Bearer ${user.token}`
@@ -22,6 +22,18 @@ export default function Habit({ habit }) {
                 axios.get(`${BASE_URL}habits`, config)
                     .then((res) => {
                         setHabits(res.data)
+                        axios.get(`${BASE_URL}/habits/today`, config)
+                            .then((res) => {
+                                let percentege = 0;
+                                res.data.forEach((h) => {
+                                    if (h.done) {
+                                        percentege += 100 / res.data.length;
+                                    }
+                                }
+                                )
+                                setPercentege(percentege);
+                            })
+                            .catch((err) => alert(err));
                     })
                     .catch((err) => {
                         alert(err.response.data)
