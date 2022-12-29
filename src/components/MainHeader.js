@@ -29,7 +29,7 @@ const Header = styled.header`
     position: fixed;
     z-index: 1;
     p{
-        color: #BABABA;
+        color: #FFFFFF;
         font-size: 20px;
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
